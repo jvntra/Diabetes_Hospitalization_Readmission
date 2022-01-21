@@ -1,6 +1,6 @@
 # Diabetes Hospitalizations
 
-Jean-Paul Ventura 
+Jean-Paul Ventura & Aren Carpenter
 
 
 ## Introduction
@@ -14,7 +14,7 @@ HbA1c is a measure of how glycated one's red blood cells are. This gives a bette
 
 ## The Model
 
-I used a logistic regression model to enable interpreting our coefficients and drawing relative comparisons between features. A non-polynomial model performed best and allowed for easier interpretation of coefficients. I also tried a decision tree model, but it consistently performed worse than our logistic regression even after iterative improvments using SMOTE, tomek links, and gridsearch. 
+We used a logistic regression model to enable interpreting our coefficients and drawing relative comparisons between features. A non-polynomial model performed best and allowed for easier interpretation of coefficients. I also tried a decision tree model, but it consistently performed worse than our logistic regression even after iterative improvments using SMOTE, tomek links, and gridsearch. 
 
 ### Data Collection & Cleaning
 
@@ -24,9 +24,9 @@ The data set was a subset of some 75 million inpatient visits between 1998 and 2
 
 ### Feature Engineering
 
-I observed that the effect of age on readmittance was clearly different between different age ranges. Therefore, I binned age into 0-30, 30-60, and 60-100 categories. Various diagnoses were reported when patients were admitted inpatient via ICD-9 medical billing codes, but only the first three were listed. It was intractable to use get_dummies due to the sheer number of possible diagnoses observed. Therefore, I created columns for if diabetes (ICD-9 code 250.xx) was listed as one of the top diagnoses.
+We observed that the effect of age on readmittance was clearly different between different age ranges. Therefore, I binned age into 0-30, 30-60, and 60-100 categories. Various diagnoses were reported when patients were admitted inpatient via ICD-9 medical billing codes, but only the first three were listed. It was intractable to use get_dummies due to the sheer number of possible diagnoses observed. Therefore, I created columns for if diabetes (ICD-9 code 250.xx) was listed as one of the top diagnoses.
 
-From outside research, I know that the HbA1C test is very important for assessing long-term management of glucose levels in the blood. However, less than 20% of inpatient visits resulted in a HbA1c test. Furthermore, if a patient was given a HbA1c test, one would hope that patient's medication would be adjusted if necessary. Having a feature for 'Change in Meds' I was able to engineer a feature for when a patient likely needed an adjustment and if it was done or not. 
+From outside research, it is known that the HbA1C test is very important for assessing long-term management of glucose levels in the blood. However, less than 20% of inpatient visits resulted in a HbA1c test. Furthermore, if a patient was given a HbA1c test, one would hope that patient's medication would be adjusted if necessary. Having a feature for 'Change in Meds' I was able to engineer a feature for when a patient likely needed an adjustment and if it was done or not. 
 
 ![](Images/HbA1c_test.png) 
 
@@ -43,6 +43,6 @@ Interestingly, patients who did not receive even the daily, point blood sugar te
 
 ## Future Directions
 
-I encourage physicians to offer both blood sugar and HbA1c tests for all diabetic inpatient visits regardless of the main cause of visit. Frequent testing will better capture emerging complications than waiting for adverse symptoms. This sort of preventative testing is done in ICUs already because of the clear health benefits, but it could be utilized in all inpatient cases.
+We encourage physicians to offer both blood sugar and HbA1c tests for all diabetic inpatient visits regardless of the main cause of visit. Frequent testing will better capture emerging complications than waiting for adverse symptoms. This sort of preventative testing is done in ICUs already because of the clear health benefits, but it could be utilized in all inpatient cases.
 
 Even with more than 60,000 observations, our dataset greatly underestimates the true population of diabetic patients in the United States. An interesting next step would be to incorporate financial elements to the analysis. Diabetes treatment is quite expensive for the individual, on average $17,000 per year per patient, and for society, $1 of every $4 healthcare spending is diabetes-related. We would attempt to assign cost/benefit analysis to various testing and treatment options to optimize care and minimize costs.
